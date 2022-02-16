@@ -1,9 +1,23 @@
 <template>
-  {{ searchCaption }}: <input class="search-input" type="text" />
+  {{ searchCaption }}:
+  <input class="search-input" type="text" v-model="inputValue" />
+  {{ inputValue }}
 </template>
 
 <script>
-export default { props: ['searchCaption'] };
+export default {
+  props: ['searchCaption'],
+  data() {
+    return {
+      inputValue: '',
+    };
+  },
+  watch: {
+    inputValue(e) {
+      this.$emit('enteredData', e);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

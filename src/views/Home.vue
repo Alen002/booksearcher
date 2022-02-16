@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-search search-caption="Search" />
+    <base-search search-caption="Search" @enteredData="enteredData" />
 
     <base-button @emitBaseButton="getData" button-title="Get Data" />
     <base-button @emitBaseButton="clearData" button-title="Clear" />
@@ -18,14 +18,19 @@ export default {
     return {
       api: process.env.VUE_APP_api,
       results: '',
+      endpoint: 'https://www.googleapis.com/books/v1/volumes',
+      queryField: '',
     };
   },
   methods: {
+    enteredData(e) {
+      this.queryField = e;
+    },
     getData() {
       console.log('Start fetching___');
       axios
         .get(
-          `https://www.googleapis.com/books/v1/volumes?q=bradbury+inauthor:keyes&key=${this.api}`
+          `${this.endpoint}?q=${this.queryField}&maxResults=1&keyes&key=${this.api}`
         )
         .then((res) => res.data)
         .then((data) => (this.results = data));
