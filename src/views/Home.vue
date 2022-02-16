@@ -1,8 +1,8 @@
 <template>
   <div>
     <h3>Home</h3>
-    <button @click="getData">AXIOS</button>
-    <base-button />
+    <!-- <button @click="getData">AXIOS</button> -->
+    <base-button @emitBaseButton="getData" button-title="Get Data" />
     <pre>{{ results }}</pre>
   </div>
 </template>

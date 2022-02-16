@@ -1,12 +1,14 @@
 <template>
-  <button>CLICK ME</button>
+  <button @click="$emit('emitBaseButton')">{{ buttonTitle }}</button>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ['buttonTitle'],
+};
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 button {
   padding: 0.75rem 1.5rem;
   font-family: inherit;
