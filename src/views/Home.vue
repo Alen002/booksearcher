@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h3>Home</h3>
-    <!-- <button @click="getData">AXIOS</button> -->
+    <base-search search-caption="Search" />
+
     <base-button @emitBaseButton="getData" button-title="Get Data" />
+    <base-button @emitBaseButton="clearData" button-title="Clear" />
     <pre>{{ results }}</pre>
   </div>
 </template>
@@ -10,12 +11,13 @@
 <script>
 import axios from 'axios';
 import BaseButton from '../components/UI/BaseButton.vue';
+import BaseSearch from '../components/UI/BaseSearch.vue';
 export default {
-  components: { BaseButton },
+  components: { BaseButton, BaseSearch },
   data() {
     return {
       api: process.env.VUE_APP_api,
-      results: null,
+      results: '',
     };
   },
   methods: {
@@ -27,6 +29,9 @@ export default {
         )
         .then((res) => res.data)
         .then((data) => (this.results = data));
+    },
+    clearData() {
+      this.results = '';
     },
   },
 };
