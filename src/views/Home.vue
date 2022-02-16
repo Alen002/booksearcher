@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h3>TheMainPage.vue {{ api }}</h3>
+    <h3>Home</h3>
+    <button>AXIOS</button>
   </div>
 </template>
 
@@ -10,6 +11,9 @@ export default {
     return {
       api: process.env.VUE_APP_api,
     };
+  },
+  methods: {
+    getData() {},
   },
 };
 </script>

@@ -1,10 +1,12 @@
-<template><the-main-page /></template>
+<template><the-header /><home /><the-footer /></template>
 
 <script>
-import TheMainPage from './components/Resources/TheMainPage.vue';
+import Home from '@/views/Home.vue';
+import TheHeader from '@/components/TheHeader.vue';
+import TheFooter from '@/components/TheFooter.vue';
 export default {
   name: 'App',
-  components: { TheMainPage },
+  components: { TheHeader, Home, TheFooter },
 };
 </script>
 
@@ -19,5 +21,6 @@ html {
 }
 body {
   margin: 0;
+  background-color: lightblue;
 }
 </style>
