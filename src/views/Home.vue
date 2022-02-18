@@ -36,6 +36,19 @@ export default {
     enteredData(e) {
       this.queryField = e;
     },
+    destructureData(payload) {
+      const { items } = payload;
+      this.results = items.map(
+        ({ volumeInfo: { title, authors, publisher, description } }) => ({
+          title,
+          authors,
+          publisher,
+          description,
+        })
+      );
+      console.log(this.results);
+    },
+
     getData() {
       axios
         .get(
@@ -43,21 +56,8 @@ export default {
         )
         .then((res) => res.data)
         .then((data) => {
-          destructureData(data);
+          this.destructureData(data);
         });
-
-      const destructureData = (e) => {
-        const { items } = e;
-        this.results = items.map(
-          ({ volumeInfo: { title, authors, publisher, description } }) => ({
-            title,
-            authors,
-            publisher,
-            description,
-          })
-        );
-        console.log(this.results);
-      };
     },
     clearData() {
       this.results = '';
