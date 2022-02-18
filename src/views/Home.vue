@@ -1,17 +1,9 @@
 <template>
-  <div>
+  <div class="test">
     <base-search search-caption="Search" @emitBaseSearch="enteredData" />
     <base-button @emitBaseButton="getData" button-title="Get Data" />
     <base-button @emitBaseButton="clearData" button-title="Clear" />
-
-    <ul v-for="result in results" :key="result">
-      <li>
-        <h3>Title:{{ resulttitle }}</h3>
-        Authors:{{ result.authors }}<br />
-        <p>Publisher {{ result.publisher }}</p>
-        Description:{{ result.description }}<br />
-      </li>
-    </ul>
+    <list-resource :results="results" />
   </div>
 </template>
 
@@ -21,8 +13,9 @@ import testObject from '../assets/test.js';
 import axios from 'axios';
 import BaseButton from '../components/UI/BaseButton.vue';
 import BaseSearch from '../components/UI/BaseSearch.vue';
+import ListResource from '../components/ListResource.vue';
 export default {
-  components: { BaseButton, BaseSearch },
+  components: { BaseButton, BaseSearch, ListResource },
   data() {
     return {
       api: process.env.VUE_APP_api,
@@ -46,13 +39,13 @@ export default {
           description,
         })
       );
-      console.log(this.results);
+      console.log('thisresults___', this.results);
     },
 
     getData() {
       axios
         .get(
-          `${this.endpoint}?q=${this.queryField}&maxResults=3&keyes&key=${this.api}`
+          `${this.endpoint}?q=${this.queryField}&maxResults=30&keyes&key=${this.api}`
         )
         .then((res) => res.data)
         .then((data) => {
@@ -66,4 +59,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.test {
+  background-color: red;
+  min-width: 300px;
+  /* width: 50%; */
+}
+</style>
