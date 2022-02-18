@@ -14,7 +14,7 @@ export default {
   },
   watch: {
     inputValue(e) {
-      this.$emit('enteredData', e);
+      this.$emit('emitBaseSearch', e);
     },
   },
 };
