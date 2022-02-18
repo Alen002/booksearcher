@@ -2,6 +2,7 @@
 node_modules
 /dist
 src/assets/test.js
+src/assets/testMethod.js
 
 # local env files
 .env.local
