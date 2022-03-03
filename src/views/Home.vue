@@ -4,6 +4,8 @@
     <base-button @emitBaseButton="getData" button-title="Get Data" />
     <base-button @emitBaseButton="clearData" button-title="Clear" />
     <list-resource :results="results" />
+
+    <pre>{{ test }}</pre>
   </div>
 </template>
 
@@ -19,18 +21,22 @@ export default {
   data() {
     return {
       api: process.env.VUE_APP_api,
-      results: '',
+      results: [],
       endpoint: 'https://www.googleapis.com/books/v1/volumes',
       queryField: '',
       jsonFile: testObject,
+      test: '',
     };
   },
+
   methods: {
     enteredData(e) {
       this.queryField = e;
     },
+
     destructureData(payload) {
       const { items } = payload;
+
       this.results = items.map(
         ({ volumeInfo: { title, authors, publisher, description } }) => ({
           title,
@@ -39,7 +45,6 @@ export default {
           description,
         })
       );
-      console.log('thisresults___', this.results);
     },
 
     getData() {
@@ -61,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 .test {
-  background-color: red;
+  /*  background-color: red; */
   min-width: 300px;
   /* width: 50%; */
 }

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="book-list">
     <ul v-for="result in results" :key="result">
-      <li>
+      <li class="book-list__item">
         <strong>Title:</strong>
         {{ result.title }}
         <strong>Author(s):</strong>
@@ -15,10 +15,27 @@
       </li>
     </ul>
   </div>
+  <pagination :pageItems="results.length" />
 </template>
 
 <script>
-export default { props: ['results'] };
+import Pagination from './Pagination.vue';
+export default {
+  components: { Pagination },
+  props: ['results'],
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.book-list {
+  &__item {
+    padding: 10px 10px;
+    border: solid lightgrey 1px;
+    border-radius: 10px;
+    background-color: white;
+  }
+  ul {
+    list-style: none;
+  }
+}
+</style>
