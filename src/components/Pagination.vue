@@ -24,11 +24,12 @@ export default {
   props: ['pageItems'],
   methods: {
     paginateCounter(clicked) {
-      if (
-        clicked === 'increase' &&
-        this.pageItems > 0 &&
-        this.counter < this.pageItems
-      ) {
+      let pages = Number.isInteger(this.pageItems / 10)
+        ? this.pageItems / 10
+        : Math.trunc(this.pageItems / 10) + 1;
+
+      console.log(pages);
+      if (clicked === 'increase' && pages > 0 && this.counter < pages) {
         this.counter += 1;
       } else if (clicked === 'decrease' && this.counter > 0) {
         this.counter -= 1;

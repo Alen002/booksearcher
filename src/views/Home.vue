@@ -50,7 +50,7 @@ export default {
     getData() {
       axios
         .get(
-          `${this.endpoint}?q=${this.queryField}&maxResults=30&keyes&key=${this.api}`
+          `${this.endpoint}?q=${this.queryField}&maxResults=21&keyes&key=${this.api}`
         )
         .then((res) => res.data)
         .then((data) => {
