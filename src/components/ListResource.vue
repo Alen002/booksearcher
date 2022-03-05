@@ -1,6 +1,6 @@
 <template>
   <div class="book-list">
-    <ul v-for="result in results" :key="result">
+    <ul v-for="result in results.slice(pageStart, pageEnd)" :key="result">
       <li class="book-list__item">
         <strong>Title:</strong>
         {{ result.title }}
@@ -15,7 +15,8 @@
       </li>
     </ul>
   </div>
-  <pagination :pageItems="results.length" />
+  <pagination :pageItems="results.length" @emitCounter="counter" />
+  COUNTER:{{ pageCounter }}
 </template>
 
 <script>
@@ -23,6 +24,34 @@ import Pagination from './Pagination.vue';
 export default {
   components: { Pagination },
   props: ['results'],
+  data() {
+    return {
+      pageStart: 0,
+      pageEnd: 10,
+      pageCounter: '',
+      count: 0,
+    };
+  },
+  methods: {
+    counter(payloadCounter, payloadPages, payloadState) {
+      if (
+        payloadCounter > 0 &&
+        payloadCounter <= payloadPages &&
+        payloadState === 'increase'
+      ) {
+        this.pageStart += 10;
+        this.pageEnd += 10;
+        //
+      } else if (
+        payloadCounter > 0 &&
+        payloadCounter <= payloadPages &&
+        payloadState === 'decrease'
+      ) {
+        this.pageStart -= 10;
+        this.pageEnd -= 10;
+      }
+    },
+  },
 };
 </script>
 

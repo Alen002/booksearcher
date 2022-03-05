@@ -18,7 +18,7 @@
 import BaseButton from './UI/BaseButton.vue';
 export default {
   data() {
-    return { counter: 0 };
+    return { counter: 1 };
   },
   components: { BaseButton },
   props: ['pageItems'],
@@ -31,8 +31,10 @@ export default {
       console.log(pages);
       if (clicked === 'increase' && pages > 0 && this.counter < pages) {
         this.counter += 1;
-      } else if (clicked === 'decrease' && this.counter > 0) {
+        this.$emit('emitCounter', this.counter, pages, 'increase');
+      } else if (clicked === 'decrease' && this.counter > 1) {
         this.counter -= 1;
+        this.$emit('emitCounter', this.counter, pages, 'decrease');
       }
     },
   },
@@ -44,7 +46,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 20%;
+  width: 2 0%;
   background-color: red;
 }
 
